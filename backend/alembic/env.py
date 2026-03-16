@@ -19,6 +19,9 @@ from src.models import (
     GeolocationRecord,
     FinancialRecord,
     SatelliteAnalysis,
+    ProjectAOI,
+    ComputeJob,
+    ProjectFeature,
 )
 
 # this is the Alembic Config object, which provides

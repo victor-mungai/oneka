@@ -40,6 +40,10 @@ class Settings(BaseSettings):
     copernicus_username: Optional[str] = None
     copernicus_password: Optional[str] = None
     google_maps_api_key: Optional[str] = None
+    sentinelhub_client_id: Optional[str] = None
+    sentinelhub_client_secret: Optional[str] = None
+    sentinelhub_base_url: Optional[str] = "https://services.sentinel-hub.com"
+    sentinelhub_token_url: Optional[str] = "https://services.sentinel-hub.com/oauth/token"
 
     # Redis
     redis_url: str = "redis://localhost:6379/0"

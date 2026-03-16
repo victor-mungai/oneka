@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 
 from src.config import settings
 from src.routers import health
+from src.routers import projects
 
 # Create FastAPI application
 app = FastAPI(
@@ -55,6 +56,7 @@ async def root():
 
 # Include routers
 app.include_router(health.router, prefix="/api/v1", tags=["Health"])
+app.include_router(projects.router, prefix="/api/v1", tags=["Projects"])
 
 
 # Global exception handler

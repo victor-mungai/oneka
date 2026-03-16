@@ -2,7 +2,7 @@
 Project model - Master registry for all infrastructure projects.
 """
 
-from sqlalchemy import Column, String, Integer, DECIMAL, Enum
+from sqlalchemy import Column, String, Integer, DECIMAL, Enum, Date
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 import uuid
@@ -65,6 +65,18 @@ class Project(Base, TimestampMixin):
         String, nullable=False, index=True, comment="Official project name"
     )
 
+    description = Column(
+        String,
+        nullable=True,
+        comment="Project description or summary",
+    )
+
+    implementing_agency = Column(
+        String,
+        nullable=True,
+        comment="Implementing agency or entity responsible for delivery",
+    )
+
     project_type = Column(
         Enum(ProjectType),
         nullable=True,
@@ -85,6 +97,14 @@ class Project(Base, TimestampMixin):
     # Financial Information
     estimated_value_kes = Column(
         DECIMAL(15, 2), nullable=True, comment="Contract value in Kenya Shillings"
+    )
+
+    start_date = Column(
+        Date, nullable=True, comment="Expected project start date"
+    )
+
+    expected_completion = Column(
+        Date, nullable=True, comment="Expected project completion date"
     )
 
     # Status and Risk
@@ -131,6 +151,18 @@ class Project(Base, TimestampMixin):
 
     satellite_analyses = relationship(
         "SatelliteAnalysis", back_populates="project", cascade="all, delete-orphan"
+    )
+
+    aoi = relationship(
+        "ProjectAOI", back_populates="project", uselist=False, cascade="all, delete-orphan"
+    )
+
+    compute_jobs = relationship(
+        "ComputeJob", back_populates="project", cascade="all, delete-orphan"
+    )
+
+    features = relationship(
+        "ProjectFeature", back_populates="project", cascade="all, delete-orphan"
     )
 
     def __repr__(self):
