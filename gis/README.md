@@ -28,7 +28,7 @@ Project data should be organized like:
 
 ```text
 projects/
-  atlanta_stadium/
+  talanta_stadium/
     aoi.geojson
     sentinel1/
       2022-01/
@@ -69,34 +69,34 @@ cd gis/src
 
 ```bash
 python cli_runner.py process-s1-month \
-  --vv "projects/atlanta_stadium/raw/sentinel1/YYYY-MM/vv.tif" \
-  --vh "projects/atlanta_stadium/raw/sentinel1/YYYY-MM/vh.tif" \
-  --output-dir "projects/atlanta_stadium/sentinel1/YYYY-MM" \
-  --aoi "projects/atlanta_stadium/aoi.geojson"
+  --vv "projects/talanta_stadium/raw/sentinel1/YYYY-MM/vv.tif" \
+  --vh "projects/talanta_stadium/raw/sentinel1/YYYY-MM/vh.tif" \
+  --output-dir "projects/talanta_stadium/sentinel1/YYYY-MM" \
+  --aoi "projects/talanta_stadium/aoi.geojson"
 ```
 
 ### 2) Process one Sentinel-2 month
 
 ```bash
 python cli_runner.py process-s2-month \
-  --band B03="projects/atlanta_stadium/raw/sentinel2/YYYY-MM/B03.jp2" \
-  --band B04="projects/atlanta_stadium/raw/sentinel2/YYYY-MM/B04.jp2" \
-  --band B08="projects/atlanta_stadium/raw/sentinel2/YYYY-MM/B08.jp2" \
-  --band B11="projects/atlanta_stadium/raw/sentinel2/YYYY-MM/B11.jp2" \
-  --output-dir "projects/atlanta_stadium/sentinel2/YYYY-MM" \
-  --aoi "projects/atlanta_stadium/aoi.geojson"
+  --band B03="projects/talanta_stadium/raw/sentinel2/YYYY-MM/B03.jp2" \
+  --band B04="projects/talanta_stadium/raw/sentinel2/YYYY-MM/B04.jp2" \
+  --band B08="projects/talanta_stadium/raw/sentinel2/YYYY-MM/B08.jp2" \
+  --band B11="projects/talanta_stadium/raw/sentinel2/YYYY-MM/B11.jp2" \
+  --output-dir "projects/talanta_stadium/sentinel2/YYYY-MM" \
+  --aoi "projects/talanta_stadium/aoi.geojson"
 ```
 
 ### 3) Build final monthly features table
 
 ```bash
-python cli_runner.py build-features --project-path "projects/atlanta_stadium"
+python cli_runner.py build-features --project-path "projects/talanta_stadium"
 ```
 
 Output:
 
 ```text
-projects/atlanta_stadium/features/features.parquet
+projects/talanta_stadium/features/features.parquet
 ```
 
 ## Notes

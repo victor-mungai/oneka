@@ -6,21 +6,28 @@ import rasterio
 from rasterio.mask import mask
 
 
+def _default_nodata_for_dtype(dtype):
+    np_dtype = np.dtype(dtype)
+    if np.issubdtype(np_dtype, np.floating):
+        return np.nan
+    return 0
+
+
 def clip_to_aoi(raster_path, aoi_path):
     aoi = gpd.read_file(aoi_path)
     with rasterio.open(raster_path) as src:
         aoi = aoi.to_crs(src.crs)
-        clipped, transform = mask(src, aoi.geometry, crop=True, filled=True, nodata=src.nodata)
+        nodata_value = src.nodata if src.nodata is not None else _default_nodata_for_dtype(src.dtypes[0])
+        clipped, transform = mask(src, aoi.geometry, crop=True, filled=True, nodata=nodata_value)
         profile = src.profile.copy()
         profile.update(
             {
                 "height": clipped.shape[1],
                 "width": clipped.shape[2],
                 "transform": transform,
+                "nodata": nodata_value,
             }
         )
-        if profile.get("nodata") is None:
-            profile["nodata"] = np.nan
     return clipped, profile
 
 

@@ -2,6 +2,7 @@ import argparse
 from pathlib import Path
 
 from feature_engine import build_time_series
+from optical_extractor import compute_optical_indices
 from process_month import process_sentinel1_month, process_sentinel2_month
 
 
@@ -62,6 +63,9 @@ def main():
             raise ValueError("At least one --band BAND_NAME=PATH is required for process-s2-month.")
         process_sentinel2_month(band_map, Path(args.output_dir), args.aoi)
         print(f"Saved Sentinel-2 clipped files in: {args.output_dir}")
+        optical = compute_optical_indices(Path(args.output_dir), aoi_path=None)
+        print("Optical stats:")
+        print(optical)
         return
 
     if args.command == "build-features":

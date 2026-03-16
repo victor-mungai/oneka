@@ -3,3 +3,6 @@ numpy
 rasterio
 pandas
 pyarrow
+pystac-client
+planetary-computer
+requests
